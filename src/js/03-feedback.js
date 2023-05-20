@@ -15,12 +15,14 @@ populateFormFields();
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-  console.log(formData);
-  formRef.reset();
-  localStorage.removeItem(STORAGE_KEY);
-  // clearFormDataFromLocalStorage();
+  if (userEmailRef.value && userMessageRef.value) {
+    console.log(formData);
+    formRef.reset();
+    localStorage.removeItem(STORAGE_KEY);
+  } else {
+    alert('Поля форми не можуть бути порожніми');
+  }
 }
-
 function saveFormDataToLocalStorage() {
   formData = {
     email: userEmailRef.value,
@@ -37,10 +39,6 @@ function populateFormFields() {
     userEmailRef.value = formData.email || '';
     userMessageRef.value = formData.message || '';
   }
-}
-
-function clearFormDataFromLocalStorage() {
-  localStorage.removeItem(STORAGE_KEY);
 }
 
 ///////////////////// 2 v ////////////////
